@@ -1,13 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:random_text_reveal/random_text_reveal.dart';
 import 'package:sponsers/interface.dart';
+import 'package:sponsers/interface1.dart';
 
 void main() {
-  runApp(MaterialApp(
-    home: Sponsors(),
-    theme: ThemeData(
-      brightness: Brightness.dark,
-    ),
-  ));
+    runApp(const Myapp());
+}
+
+class Myapp extends StatelessWidget {
+  const Myapp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: const Sponsors(),
+      theme: ThemeData(
+        brightness: Brightness.dark,
+      ),
+    );
+  }
 }
 
 class Sponsors extends StatefulWidget {
@@ -23,8 +34,9 @@ class _SponsorsState extends State<Sponsors> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: Text(
-          "SPONSORS",
+        title: RandomTextReveal(
+          duration: const Duration(seconds: 2),
+          text: "SPONSORS",
           style: TextStyle(
             fontFamily: 'Mars',
             fontSize: 25,
@@ -36,14 +48,27 @@ class _SponsorsState extends State<Sponsors> {
       body: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/background.jpeg'),
+                image: AssetImage('assets/back.jpg'),
                 fit: BoxFit.cover
               )
             ),
           ),
-          ui()
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ui(),
+              FloatingActionButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const ui1()),
+                    );
+                  }
+              )
+            ],
+          )
         ],
       ),
     );
